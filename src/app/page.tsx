@@ -73,15 +73,57 @@ const TodoItemDescription = styled.p`
   padding: 0;
 `;
 
+const TodoItemEditButton = styled.button`
+  background-color: blue;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    background-color: lightblue;
+  }
+`;
+
+const TodoItemDeleteButton = styled.button`
+  background-color: red;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    background-color: lightcoral;
+  }
+`;
+
 export default function Home() {
   const [todos, setTodos] = useState([]);
 
   async function getTodos() {
-    const response = await fetch("https://localhost:7085/ToDo");
+    const response = await fetch("https://localhost:7085/ToDo", {
+      method: "GET",
+    });
     const data = await response.json();
     console.log(data);
     setTodos(data);
   }
+
+  async function deleteTodo(id: string) {
+    const response = await fetch(`https://localhost:7085/ToDo/${id}`, {
+      method: "DELETE",
+    });
+    console.log(response);
+    getTodos();
+  }
+
+  // async function updateTodo(id: string) {
+  //   const response = await fetch(`https://localhost:7085/ToDo/${id}`, {
+  //     method: "PUT",
+  //   });
+  //   const data = await response.json();
+  //   console.log(data);
+  // }
 
   useEffect(() => {
     getTodos();
@@ -98,9 +140,13 @@ export default function Home() {
           <TodoTitle>Todo List</TodoTitle>
           <TodoList>
             {todos.map((todo: any) => (
-              <TodoItem key={todo.id}>
+              <TodoItem key={todo.guid}>
                 <TodoItemTitle>{todo.title}</TodoItemTitle>
                 <TodoItemDescription>{todo.description}</TodoItemDescription>
+                <TodoItemEditButton>Edit</TodoItemEditButton>
+                <TodoItemDeleteButton onClick={() => deleteTodo(todo.guid)}>
+                  Delete
+                </TodoItemDeleteButton>
               </TodoItem>
             ))}
           </TodoList>
