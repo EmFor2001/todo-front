@@ -1,7 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Button } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 const RootContainer = styled.div`
   display: flex;
@@ -73,27 +78,36 @@ const TodoItemDescription = styled.p`
   padding: 0;
 `;
 
-const TodoItemEditButton = styled.button`
-  background-color: blue;
+const TodoItemEditButton = styled(Button)`
   font-size: 1.5rem;
   font-weight: 400;
-  margin: 0;
-  padding: 0;
+  margin: 10px;
+  padding-box: 20px;
 
   &:hover {
     background-color: lightblue;
   }
 `;
 
-const TodoItemDeleteButton = styled.button`
-  background-color: red;
+const TodoItemDeleteButton = styled(Button)`
   font-size: 1.5rem;
   font-weight: 400;
-  margin: 0;
-  padding: 0;
+  margin: 10px;
+  padding-box: 20px;
 
   &:hover {
     background-color: lightcoral;
+  }
+`;
+
+const AddTodoButton = styled(Button)`
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 10px;
+  padding-box: 20px;
+
+  &:hover {
+    background-color: lightgreen;
   }
 `;
 
@@ -138,14 +152,26 @@ export default function Home() {
         </TitleContainer>
         <TodoContainer>
           <TodoTitle>Todo List</TodoTitle>
+          <Link href="/addTodo">
+            <AddTodoButton variant="contained">
+              <AddIcon />
+            </AddTodoButton>
+          </Link>
           <TodoList>
             {todos.map((todo: any) => (
               <TodoItem key={todo.guid}>
                 <TodoItemTitle>{todo.title}</TodoItemTitle>
                 <TodoItemDescription>{todo.description}</TodoItemDescription>
-                <TodoItemEditButton>Edit</TodoItemEditButton>
-                <TodoItemDeleteButton onClick={() => deleteTodo(todo.guid)}>
-                  Delete
+                <Link href={`/editTodo/${todo.guid}`}>
+                  <TodoItemEditButton variant="contained">
+                    <EditIcon />
+                  </TodoItemEditButton>
+                </Link>
+                <TodoItemDeleteButton
+                  variant="contained"
+                  onClick={() => deleteTodo(todo.guid)}
+                >
+                  <DeleteIcon />
                 </TodoItemDeleteButton>
               </TodoItem>
             ))}
