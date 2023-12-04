@@ -11,6 +11,16 @@ const RootContainer = styled.div`
   justify-content: center;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+  width: 100%;
+  padding: 20px;
+`;
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +29,7 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -30,6 +40,9 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: hsl(84, 47%, 55%, 10%);
+  padding: 20px;
+  border-radius: 10px;
 `;
 
 const StyledForm = styled.form`
@@ -37,6 +50,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 `;
 
 const FormItem = styled.div`
@@ -46,12 +60,12 @@ const FormItem = styled.div`
   justify-content: center;
 `;
 
-const FormLabel = styled.label`
-  font-size: 1.25rem;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-`;
+// const FormLabel = styled.label`
+//   font-size: 1.25rem;
+//   font-weight: 400;
+//   margin: 0;
+//   padding: 0;
+// `;
 
 const StyledButton = styled(Button)`
   font-size: 1.5rem;
@@ -79,32 +93,32 @@ const AddTodo = () => {
   return (
     <>
       <RootContainer>
-        <TitleContainer>
-          <Title>Add Todo</Title>
-        </TitleContainer>
-        <FormContainer>
-          <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <TextField
-                label="Title"
-                variant="outlined"
-                {...register("title")}
-              ></TextField>
-            </FormItem>
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <TextField
-                label="Description"
-                variant="outlined"
-                {...register("description")}
-              ></TextField>
-            </FormItem>
-            <StyledButton variant="contained" type="submit">
-              Submit
-            </StyledButton>
-          </StyledForm>
-        </FormContainer>
+        <Wrapper>
+          <TitleContainer>
+            <Title>Add Todo</Title>
+          </TitleContainer>
+          <FormContainer>
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+              <FormItem>
+                <TextField
+                  label="Title"
+                  variant="outlined"
+                  {...register("title")}
+                ></TextField>
+              </FormItem>
+              <FormItem>
+                <TextField
+                  label="Description"
+                  variant="outlined"
+                  {...register("description")}
+                ></TextField>
+              </FormItem>
+              <StyledButton variant="contained" type="submit">
+                Submit
+              </StyledButton>
+            </StyledForm>
+          </FormContainer>
+        </Wrapper>
       </RootContainer>
     </>
   );

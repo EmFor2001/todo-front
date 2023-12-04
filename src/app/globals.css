@@ -5,9 +5,11 @@
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --text: #10130c;
+  --background: #f7f9f3;
+  --primary: #97c256;
+  --secondary: #bcdf87;
+  --accent: #afe261;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -86,14 +88,14 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--text);
   /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
-  background-color: white;
+  background-color: var(--background);
   font-family: "Inter", sans-serif;
   height: 100vh;
 }
